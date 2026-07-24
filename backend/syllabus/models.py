@@ -41,8 +41,8 @@ class Topic(models.Model):
 class UserProgress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    theory_completed = models.BooleanField(default=False)
-    practice_completed = models.BooleanField(default=False)
+    is_completed = models.BooleanField(default=False)
+    # practice_completed = models.BooleanField(default=False)
     user_note = models.TextField(max_length=500, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 

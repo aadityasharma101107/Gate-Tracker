@@ -1,0 +1,33 @@
+{
+    "branch": "Computer Science & IT",
+    "subjects": [
+        {
+            "name": "Operating Systems",
+            "topics": [
+                "System Calls",
+                "Processes",
+                "Threads",
+                "Inter-process communication",
+                "concurrency and synchronization",
+                "Deadlock",
+                "CPU and I/O sheduling",
+                "Memory management and virtual memory",
+                "File System"
+            ]
+        },
+        {
+            "name": "Databases",
+            "topics": [
+                "ER-model",
+                "Relational model : Relational algebra",
+                "Relational model : tuple calculus",
+                "Relational model : SQL",
+                "Integrity constraints",
+                "Normal forms",
+                "File Organization",
+                "Indexing(B and B+ trees)",
+                "Transactions and concurrency control"
+            ]
+        }
+    ]
+}
