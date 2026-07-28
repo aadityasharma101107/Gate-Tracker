@@ -28,6 +28,172 @@
                 "Indexing(B and B+ trees)",
                 "Transactions and concurrency control"
             ]
+        },
+        {
+            "name": "Computer Networks",
+            "topics": [
+                "Principles of Layering",
+                "Basics of switching (circuit, packet and virtual circuit) and performance metrics",
+                "Data link layer: error detection",
+                "Medium Access Control",
+                "Ethernet",
+                "Distance vector and link state routing",
+                "IPv4: Fragmentation, CIDR Notation, Network Address Translation",
+                "TCP: flow control and congestion control",
+                "Socket API",
+                "DNS and HTTP"
+            ]
+        },
+        {
+            "name": "Digital Logic",
+            "topics": [
+                "Boolean algebra and minimization : algebraic technique",
+                "Boolean algebra and minimization : Karnaugh map",
+                "Boolean algebra and minimization : tabular method",
+                "Design of combinational circuits",
+                "Design of sequential circuits",
+                "Number representation and arithmetic (fixed point)",
+                "Number representation and arithmetic (floating point)"
+            ]
+        },
+        {
+            "name": "Engineering Mathematics",
+            "topics": [
+                "Discrete Mathematics : Propositional and first order logic",
+                "Discrete Mathematics : Sets, relations",
+                "Discrete Mathematics : functions",
+                "Discrete Mathematics : partial orders and lattices",
+                "Discrete Mathematics : Monoids, Groups",
+                "Discrete Mathematics : Graphs (connectivity, matching, colouring)",
+                "Discrete Mathematics : Combinatorics (counting, recurrence relations, generating functions)",
+                "Linear Algebra : Matrices and determinants",
+                "Linear Algebra : System of linear equations",
+                "Linear Algebra : Eigenvalues and eigenvectors",
+                "Linear Algebra : LU decomposition",
+                "Calculus : Limits, continuity and differentiability",
+                "Calculus : Maxima and minima",
+                "Calculus : Mean value theorem",
+                "Calculus : Integration",
+                "Probability and Statistics : Random variables",
+                "Probability and Statistics : Distributions (Uniform, normal, exponential, Poisson, binomial)",
+                "Probability and Statistics : Mean, median",
+                "Probability and Statistics : mode and standard deviation",
+                "Probability and Statistics : Conditional probability and Bayes theorem"
+            ]
+        },
+        {
+            "name": "Computer Organization and Architecture",
+            "topics": [
+                "Instruction set and addressing modes",
+                "Design of arithmetic and logic unit (ALU)",
+                "Design of control unit : hardwired and microprogrammed",
+                "Memory interfacing and hierarchy : performance",
+                "Memory interfacing and hierarchy : cache memory mapping",
+                "I/O interface : interrupt and DMA",
+                "Instruction pipelining",
+                "Pipeline hazards"
+            ]
+        },
+        {
+            "name": "Programming and Data Structures",
+            "topics": [
+                "Programming in C",
+                "Recursion",
+                "Arrays",
+                "Stacks",
+                "Queues",
+                "Linked lists",
+                "Trees",
+                "Binary search trees",
+                "Binary heaps",
+                "Graphs"
+            ]
+        },
+        {
+            "name": "Algorithms",
+            "topics": [
+                "Searching",
+                "sorting",
+                "hashing",
+                "Asymptotic worst case time and space complexity",
+                "Algorithm design techniques : greedy",
+                "Algorithm design techniques : dynamic programming",
+                "Algorithm design techniques : divide-and-conquer",
+                "Graph traversals",
+                "Minimum spanning trees",
+                "Shortest paths"
+            ]
+        },
+        {
+            "name": "Theory of Computation",
+            "topics": [
+                "Regular expressions and finite automata",
+                "Context-free grammars and push-down automata",
+                "Regular and context-free languages",
+                "Pumping lemma",
+                "Turing machines and undecidability"
+            ]
+        },
+        {
+            "name": "Compiler Design",
+            "topics": [
+                "Lexical analysis",
+                "Parsing",
+                "Syntax-directed translation",
+                "Runtime environments",
+                "Intermediate code generation",
+                "Local optimisation",
+                "Data flow analyses : constant propagation",
+                "Data flow analyses : liveness analysis",
+                "Data flow analyses : common sub expression elimination"
+            ]
+        },
+        {
+            "name": "English",
+            "topics": [
+                "English grammar",
+                "vocabulary",
+                "sentence completion",
+                "verbal analogies",
+                "word groups",
+                "instructions",
+                "critical reasoning and verbal deduction",
+                "Reading comprehension",
+                "Interpretation of passages"
+            ]
+        },
+        {
+            "name" : "Quantitative Aptitude",
+            "topics":[
+                "Numerical computation",
+                "Estimation",
+                "Ratios",
+                "Percentages",
+                "Powers",
+                "Exponents",
+                "Logarithms",
+                "Permutations and combinations",
+                "Probability",
+                "Statistics",
+                "Mensuration",
+                "Geometry",
+                "Data interpretation using tables",
+                "charts",
+                "Graphs"
+            ]
+        }, 
+        {
+            "name":"Analytical & Spatial Aptitude",
+            "topics":[
+                "Logical reasoning",
+                "Analytical reasoning",
+                "Pattern recognition",
+                "spatial visualization",
+                "transformations",
+                "paper folding",
+                "Assembling of shapes"
+            ]
         }
+
     ]
 }
