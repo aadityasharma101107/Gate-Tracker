@@ -5,31 +5,21 @@ from .serializers import BranchDetailSerializer, SubjectSerializer, TopicSeriali
 from rest_framework.permissions import AllowAny
 from django.http import HttpResponse
 from .models import Branch, Subject, Topic
+from rest_framework.views import APIView;
+from .serializers import StudentRegistrationSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import CustomTokenObtainPairSerializer
 
 
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
-
-# def index(request):
-#     branch_list = Branch.objects.order_by("code")
-#     output = ", ".join([q.name for q in branch_list])
-#     return HttpResponse(output)
-
-
-# def branch(request, code):
-#     return HttpResponse("you're looking at branch %s" % code)
-
-# def subjects(request, code):
-#     response = "you're looking for subjects %s."
-#     return HttpResponse(response % code)
-
-# def topics(request, code):
-#     return HttpResponse("you're looking for topics %s." % code)
-
+    
 class BranchViewSet(viewsets.ModelViewSet):
     queryset = Branch.objects.all()
     serializer_class = BranchDetailSerializer
 
-class SubjectViewSet(viewsets.ModelViewSet):
+class SyllabusView(viewsets.ModelViewSet):
     queryset= Subject.objects.all()
     serializer_class = SubjectSerializer
 
@@ -38,3 +28,33 @@ class TopicViewSet(viewsets.ModelViewSet):
     serializer_class = TopicSerializer
 
     
+class RegisterStudentView(APIView):
+    """
+    POST /api/students/register/
+    Registers a new student along with their login account.
+    """
+ 
+    permission_classes = [AllowAny]
+    authentication_classes = []  # no auth needed to sign up
+ 
+    def post(self, request):
+        serializer = StudentRegistrationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        student = serializer.save()
+ 
+        return Response(
+            {
+                "message": "Registration successful.",
+                "student": {
+                    "id": student.id,
+                    "name": student.full_name,
+                    "email": student.user.email,
+                    "dob": student.dob,
+                    "branch": student.get_branch_display(),
+                    "gate_target_year": student.gate_target_year,
+                },
+            },
+            status=status.HTTP_201_CREATED,
+        )
+ 
+ 

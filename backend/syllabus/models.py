@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.conf import settings
 # This represents the Branch (CS, IT, etc.)
 class Branch(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -56,3 +56,28 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Student(models.Model):
+    class Branch(models.TextChoices):
+        CSE = "CS", "Computer Science & IT"
+        ECE = "EC", "Electronics & Communication"
+        EEE = "EE", "Electrical Engineering"
+        ME = "ME", "Mechanical Engineering"
+        CE = "CE", "Civil Engineering"
+        CH = "CH", "Chemical Engineering"
+        IN = "IN", "Instrumentation Engineering"
+        OTHER = "OT", "Other"
+ 
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="student"
+    )
+    full_name = models.CharField(max_length=150)
+    dob = models.DateField()
+    branch = models.CharField(max_length=2, choices=Branch.choices)
+    gate_target_year = models.PositiveSmallIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+ 
+    def __str__(self):
+        return f"{self.full_name} ({self.user.email})"
+ 
+ 
