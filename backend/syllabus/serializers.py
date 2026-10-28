@@ -32,8 +32,12 @@ User = get_user_model()
 
 class StudentRegistrationSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=150)
-    dob = serializers.DateField()
-    branch = serializers.ChoiceField(choices=Student.Branch.choices)
+    dob = serializers.DateField(required=False, allow_null=True, default=None)
+    branch = serializers.ChoiceField(
+        choices=Student.Branch.choices,
+        required=False,
+        default=Student.Branch.CSE
+    )
     gate_target_year = serializers.IntegerField()
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True, style={"input_type": "password"})
@@ -48,7 +52,7 @@ class StudentRegistrationSerializer(serializers.Serializer):
         return value
  
     def validate_dob(self, value):
-        if value >= date.today():
+        if value and value >= date.today():
             raise serializers.ValidationError("Date of birth must be in the past.")
         return value
  
@@ -71,21 +75,25 @@ class StudentRegistrationSerializer(serializers.Serializer):
  
     @transaction.atomic
     def create(self, validated_data):
-        validated_data.pop("confirm_password")
+        validated_data.pop("confirm_password", None)
         password = validated_data.pop("password")
-        email = validated_data.pop("email")
- 
+        email = validated_data.pop("email").lower().strip()
+        name = validated_data.pop("name")
+        gate_target_year = validated_data.pop("gate_target_year")
+        dob = validated_data.get("dob", None)
+        branch = validated_data.get("branch", Student.Branch.CSE)
         # Email doubles as username (default User model requires a username)
         user = User.objects.create_user(
             username=email, email=email, password=password
         )
-        return Student.objects.create(
+        student =  Student.objects.create(
             user=user,
-            full_name=validated_data["name"],
-            dob=validated_data["dob"],
-            branch=validated_data["branch"],
-            gate_target_year=validated_data["gate_target_year"],
+            full_name = name,
+            dob = dob,
+            branch = branch,
+            gate_target_year=gate_target_year,
         )
+        return student
  
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):

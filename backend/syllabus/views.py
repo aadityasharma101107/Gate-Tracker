@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from .serializers import BranchDetailSerializer, SubjectSerializer, TopicSerializer
 from rest_framework.permissions import AllowAny
 from django.http import HttpResponse
-from .models import Branch, Subject, Topic
+from .models import Branch, Subject, Topic, Student
 from rest_framework.views import APIView;
 from .serializers import StudentRegistrationSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -27,10 +27,13 @@ class TopicViewSet(viewsets.ModelViewSet):
     queryset = Topic.objects.all()
     serializer_class = TopicSerializer
 
+class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentRegistrationSerializer
     
 class RegisterStudentView(APIView):
     """
-    POST /api/students/register/
+    POST /api/register/
     Registers a new student along with their login account.
     """
  
@@ -49,7 +52,7 @@ class RegisterStudentView(APIView):
                     "id": student.id,
                     "name": student.full_name,
                     "email": student.user.email,
-                    "dob": student.dob,
+                    "dob": student.dob.isoformat() if student.dob else None,
                     "branch": student.get_branch_display(),
                     "gate_target_year": student.gate_target_year,
                 },

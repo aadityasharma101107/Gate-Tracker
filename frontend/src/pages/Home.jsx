@@ -343,8 +343,8 @@ export default function Home() {
             {byWeight.map((s) => (
               <li key={s.id} className="group">
                 <div className="mb-1 flex items-center justify-between text-sm">
-                  <span className="text-slate-300">{s.name}</span>
-                  <span className="font-medium text-slate-100">{s.weightage}%</span>
+                  <span className="text-slate-900">{s.name}</span>
+                  <span className="font-medium text-slate-800">{s.weightage}%</span>
                 </div>
                 <div className="h-1.5 overflow-hidden rounded-full bg-slate-900/70">
                   <div

@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import { GraduationCap, Mail, Menu, X } from 'lucide-react'
-import { AVATARS, NAV_LINKS } from '../data/siteData'
+import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { GraduationCap, Mail, Menu, X } from "lucide-react";
+import { AVATARS, NAV_LINKS } from "../data/siteData";
+import { useAuth } from "../context/authProvider";
+// import AuthButton  from './auth/AuthButton'
 
 /**
  * Sticky, blurred navbar.
@@ -9,27 +11,33 @@ import { AVATARS, NAV_LINKS } from '../data/siteData'
  * - Hamburger menu below xl (closes on route change, Escape, or link click)
  */
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
+  // const handleLogout = () => {
+  //   logout();
+  //   navigate("/login");
+  // };
   // Close the mobile menu whenever the route changes
   useEffect(() => {
-    setOpen(false)
-  }, [pathname])
+    setOpen(false);
+  }, [pathname]);
 
   // Close with the Escape key
   useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && setOpen(false)
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const linkClass = ({ isActive }) =>
     `rounded-lg px-2.5 py-2 text-sm font-medium transition-colors duration-200 ${
       isActive
-        ? 'bg-accent/60 text-slate-100'
-        : 'text-slate-400 hover:bg-accent/30 hover:text-slate-100'
-    }`
+        ? "bg-accent/60 text-slate-100"
+        : "text-slate-400 hover:bg-accent/30 hover:text-slate-100"
+    }`;
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-100/5 bg-slate-900/70 backdrop-blur-md">
@@ -49,7 +57,7 @@ export default function Navbar() {
         <ul className="hidden items-center gap-1 xl:flex">
           {NAV_LINKS.map(({ to, label }) => (
             <li key={to}>
-              <NavLink to={to} end={to === '/'} className={linkClass}>
+              <NavLink to={to} end={to === "/"} className={linkClass}>
                 {label}
               </NavLink>
             </li>
@@ -65,12 +73,43 @@ export default function Navbar() {
             Contact
           </a>
 
-          <img
-            src={AVATARS[0]}
-            alt="Your profile"
-            className="hidden h-9 w-9 rounded-full object-cover ring-2 ring-accent sm:block"
-            loading="lazy"
-          />
+          {/* Auth Action Buttons brother*/}
+          <div className="flex items-center gap-3">
+            {isAuthenticated ? (
+              <div className="flex items-center gap-4">
+                {/* <span className="hidden text-sm font-medium text-slate-600 sm:inline-block dark:text-slate-300">
+                  Hi,{" "}
+                  <span className="font-semibold text-slate-900 dark:text-white">
+                    {user?.name || user?.identifier || user?.email || "user"}
+                  </span>
+                </span> */}
+
+                <img
+                  src={AVATARS[0]}
+                  alt="Your profile"
+                  className="hidden h-9 w-9 rounded-full object-cover ring-2 ring-accent sm:block"
+                  loading="lazy"
+                />
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => navigate("/login")}
+                  className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-indigo-500 dark:hover:bg-indigo-600"
+                >
+                  Login In
+                </button>
+                <button
+                  type="button"
+                  onClick={() => navigate("/register")}
+                  className="hidden rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 sm:inline-flex dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+                >
+                  Sign Up
+                </button>
+              </div>
+            )}
+          </div>
 
           {/* Hamburger button (below xl) */}
           <button
@@ -78,7 +117,7 @@ export default function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-label={open ? "Close menu" : "Open menu"}
             className="grid h-10 w-10 place-items-center rounded-lg text-slate-300 transition hover:bg-accent/40 hover:text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 xl:hidden"
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -88,18 +127,21 @@ export default function Navbar() {
 
       {/* Mobile menu panel */}
       {open && (
-        <div id="mobile-menu" className="border-t border-slate-100/5 bg-slate-900/95 xl:hidden">
+        <div
+          id="mobile-menu"
+          className="border-t border-slate-100/5 bg-slate-900/95 xl:hidden"
+        >
           <ul className="mx-auto grid max-w-7xl gap-1 px-4 py-3 sm:grid-cols-2 sm:px-6">
             {NAV_LINKS.map(({ to, label, icon: Icon }) => (
               <li key={to}>
                 <NavLink
                   to={to}
-                  end={to === '/'}
+                  end={to === "/"}
                   className={({ isActive }) =>
                     `flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors ${
                       isActive
-                        ? 'bg-accent/60 text-slate-100'
-                        : 'text-slate-300 hover:bg-accent/30 hover:text-slate-100'
+                        ? "bg-accent/60 text-slate-100"
+                        : "text-slate-300 hover:bg-accent/30 hover:text-slate-100"
                     }`
                   }
                 >
@@ -122,5 +164,5 @@ export default function Navbar() {
         </div>
       )}
     </header>
-  )
+  );
 }

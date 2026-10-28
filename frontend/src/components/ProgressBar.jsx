@@ -12,7 +12,7 @@ export default function ProgressBar({ value, label, className = '' }) {
     >
       {/* Width is dynamic, so an inline style is the right tool here */}
       <div
-        className="h-full rounded-full bg-slate-300 transition-all duration-500"
+        className="h-full rounded-full bg-slate-900 transition-all duration-500"
         style={{ width: `${pct}%` }}
       />
     </div>

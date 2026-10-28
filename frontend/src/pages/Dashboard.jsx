@@ -13,7 +13,7 @@ import "../App.css";
 function Stat({ icon: Icon, label, value }) {
   return (
     <div className="rounded-xl bg-slate-900/50 p-4 ring-1 ring-slate-100/5 transition duration-300 hover:shadow-glow-lg">
-      <div className="flex items-center gap-2 text-sm text-slate-400">
+      <div className="flex items-center gap-2 text-sm text-slate-900">
         <Icon className="h-4 w-4" aria-hidden="true" />
         {label}
       </div>
@@ -30,6 +30,7 @@ function Stat({ icon: Icon, label, value }) {
  */
 export default function Dashboard() {
   const { tests, quizzes, pyqs, syllabusPercent } = useProgress()
+  // const { user, logout } = useAuth();
 
   const daysLeft = useMemo(() => {
     const ms = new Date(GATE_EXAM_DATE).getTime() - Date.now()
@@ -56,16 +57,16 @@ export default function Dashboard() {
 
         <div className="mt-8">
           <div className="mb-2 flex items-center justify-between text-sm">
-            <span className="text-slate-300">Syllabus completed</span>
-            <span className="font-medium text-slate-100">{syllabusPercent}%</span>
+            <span className="text-slate-900">Syllabus completed</span>
+            <span className="font-medium text-slate-900">{syllabusPercent}%</span>
           </div>
           <ProgressBar value={syllabusPercent} label="Syllabus completed" />
         </div>
 
         <div className="mt-8 flex items-center gap-4 rounded-xl bg-slate-900/50 p-4 ring-1 ring-slate-100/5">
-          <CalendarClock className="h-8 w-8 text-slate-400" aria-hidden="true" />
+          <CalendarClock className="h-8 w-8 text-slate-700" aria-hidden="true" />
           <div>
-            <p className="text-sm text-slate-400">Remaining days to GATE exam</p>
+            <p className="text-sm text-slate-800">Remaining days to GATE exam</p>
             <p className="text-3xl font-semibold tabular-nums text-slate-100">{daysLeft}</p>
           </div>
         </div>

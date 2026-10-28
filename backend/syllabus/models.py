@@ -1,7 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+# from django.contrib.auth import get_user_model
+# from django.db import transaction
+# from rest_framework import serializers
+# from .models import Student 
 # This represents the Branch (CS, IT, etc.)
+
 class Branch(models.Model):
     name = models.CharField(max_length=100, unique=True)
     code = models.CharField(max_length=10, unique=True)
@@ -57,6 +62,9 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+
+
+
 class Student(models.Model):
     class Branch(models.TextChoices):
         CSE = "CS", "Computer Science & IT"
@@ -72,7 +80,7 @@ class Student(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="student"
     )
     full_name = models.CharField(max_length=150)
-    dob = models.DateField()
+    dob = models.DateField(null=True, blank=True)
     branch = models.CharField(max_length=2, choices=Branch.choices)
     gate_target_year = models.PositiveSmallIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
