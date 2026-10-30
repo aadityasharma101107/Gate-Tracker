@@ -1,11 +1,11 @@
-// import axios, { mergeConfig } from 'axios';
+import axios from 'axios';
 
-// const api = axios.create({
-//     baseURL: 'http://127.0.0.1:8000/api',
-//     headers:{
-//         'Content-Type': 'application.json',
-//     },
-// });
+const API = axios.create({
+    BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api',
+    headers:{
+        'Content-Type': 'application.json',
+    },
+});
 
 // api.interceptors.request.use((config) => {
 //     const token = localStorage.getItem('access_token');
@@ -17,7 +17,7 @@
 
 // export default api;   
 
-const BASE_URL = 'http://127.0.0.1:8000/api';
+// const BASE_URL = 'http://127.0.0.1:8000/api';
 
 let isRefreshing = false;
 let refreshSubscribers = [];
@@ -61,7 +61,7 @@ async function refreshAccessToken() {
     throw new Error('No refresh token available');
   }
 
-  const response = await fetch(`${BASE_URL}/token/refresh/`, {
+  const response = await fetch(`${API.BASE_URL}/token/refresh/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ refresh }),
@@ -94,7 +94,7 @@ export async function apiFetch(endpoint, options = {}, isRetry = false) {
     headers['Authorization'] = `Bearer ${accessToken}`;
   }
 
-  const response = await fetch(`${BASE_URL}${endpoint}`, {
+  const response = await fetch(`${API.BASE_URL}${endpoint}`, {
     ...options,
     headers,
   });
@@ -147,4 +147,4 @@ export async function apiFetch(endpoint, options = {}, isRetry = false) {
   }
 }
 
-export { getAccessToken, getRefreshToken, setTokens, clearTokens };
+export { getAccessToken, getRefreshToken, setTokens, clearTokens, API };
