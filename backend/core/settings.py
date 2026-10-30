@@ -34,7 +34,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config(
     'ALLOWED_HOSTS',
-    default='127.0.0.1.localhost',
+    default='127.0.0.1,localhost,.onrender.com',
     cast=Csv()
 )
 
@@ -90,10 +90,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:5173, http://localhost:3000',
+    default='http://localhost:5173,http://localhost:3000',
     cast=Csv()
 )
 CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='https://gate-tracker-backend-thrx.onrender.com',
+    cast=Csv()
+)
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
