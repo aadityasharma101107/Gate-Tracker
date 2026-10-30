@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api',
+    BASE_URL: import.meta.env.VITE_API_BASE_URL || 'https://gate-tracker-backend-thrx.onrender.com',
     headers:{
         'Content-Type': 'application.json',
     },
