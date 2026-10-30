@@ -103,7 +103,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => navigate("/register")}
-                  className="hidden rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 sm:inline-flex dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+                  className="hidden rounded-lg border border-slate-900 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 sm:inline-flex dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
                 >
                   Sign Up
                 </button>
